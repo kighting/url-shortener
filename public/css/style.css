@@ -85,3 +85,7 @@ input {
 .btn-primary:hover {
     background-color: #CDF2E7;
 }
+
+.btn-primary a, .btn-primary a:hover {
+    color: #ffffff;
+}

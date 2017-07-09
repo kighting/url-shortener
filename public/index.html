@@ -1,9 +1,11 @@
 <!doctype html>
-<html>
+<html ng-app="shortUrlApp">
     <head>
         <title>URL shortener</title>
-        <link rel="stylesheet" href="/style.css">
+        <link rel="stylesheet" href="/css/style.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700", type='text/css'>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.1/angular.js"></script>
+        <script src="/js/main.js"></script>
     </head>
     <body>
         <div class="container">
@@ -12,10 +14,10 @@
             <div class="divider"></div>
             <p class="title">Example usage</p>
             <p>Input URL that you want to shorten after the original URL:</p>
-<!--            <code>https://kt-url-shortener.herokuapp.com/new/https://www.google.com/</code>-->
-            <section>
-                <input placeholder="Enter URL">
-                <div class="btn-primary">Send</div>
+            <section ng-controller='shortAppCtrl'>
+                {{urlToShorten}}
+                <input placeholder="Enter URL" ng-model="urlToShorten">
+                <div class="btn-primary"><a ng-href="/new/{{urlToShorten}}">Send</a></div>
             </section>
         </div>
     </body>
