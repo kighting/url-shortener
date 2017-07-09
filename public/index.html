@@ -15,7 +15,8 @@
             <p class="title">Example usage</p>
             <p>Input URL that you want to shorten after the original URL:</p>
             <section ng-controller='shortAppCtrl'>
-                {{urlToShorten}}
+                <!--{{urlToShorten}}-->
+                <!--Create value through the input. No need to include this.-->
                 <input placeholder="Enter URL" ng-model="urlToShorten">
                 <div class="btn-primary"><a ng-href="/new/{{urlToShorten}}">Send</a></div>
             </section>
