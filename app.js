@@ -63,15 +63,14 @@ app.get('/:urlToForward', function(req, res, next){
             return res.send('Error reading database');
         } else {
             //Redirect it
-            res.redirect(301, data.originalUrl);
-//            var re = new RegExp("^(http|https)://", "i"); //Check if the input URL has http:// or https://
-//            var strToCheck = data.originalUrl;
-//            if(re.test(strToCheck)){
-//                //https://expressjs.com/en/4x/api.html#res.redirect
-//                res.redirect(301, data.originalUrl);
-//            } else {
-//                res.redirect(301, 'http://' + data.originalUrl);   
-//            }
+            var re = new RegExp("^(http|https)://", "i"); //Check if the input URL has http:// or https://
+            var strToCheck = data.originalUrl;
+            if(re.test(strToCheck)){
+                //https://expressjs.com/en/4x/api.html#res.redirect
+                res.redirect(301, data.originalUrl);
+            } else {
+                res.redirect(301, 'http://' + data.originalUrl);   
+            }
         }
     });
 });
