@@ -34,7 +34,7 @@ app.get('/new/:urlToShorten(*)', function(req, res, next){
             {
                 //The keys need to match the schema in shortUrl.js
                 originalUrl: urlToShorten,
-                shorterUrl: short
+                shorterUrl: 'https://kt-url-shortener.herokuapp.com/' + short
             }
         );
         //Save the document to the database
@@ -55,7 +55,7 @@ app.get('/new/:urlToShorten(*)', function(req, res, next){
 
 //Query database and redirect the short URL to original URL
 app.get('/:urlToForward', function(req, res, next){
-    var urlToForward = req.params.urlToForward;
+    var urlToForward = 'https://kt-url-shortener.herokuapp.com/' + req.params.urlToForward;
     //findOne() is a build-in Mongoose function, which allows us to pass through the object and see if it exists in the database
     //Check if the shortened URL (urlToForward) match the value of any shorterUrl key in the database
     shortUrl.findOne({shorterUrl: urlToForward}, function(err, doc){
