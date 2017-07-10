@@ -28,11 +28,29 @@ app.get('/new/:urlToShorten(*)', function(req, res, next){
     //Regex for url to verify if the input is a link
     var regex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
     if(regex.test(urlToShorten)===true){
-        return res.json({urlToshorten});
+        //Create a potential document
+        var short = Math.floor(Math.random()*100000).toString();
+        var data = new shortURL(
+            {
+                //The keys need to match the schema in shortUrl.js
+                originalUrl: urlToShorten,
+                shorterUrl: short
+            }
+        );
+        //Save the document to the database
+        data.save(function(err){
+           if(err){
+               return res.send('Error saving to database');
+           }
+        });
+        return res.json(data);
     } else {
-        return res.json({urlToshorten: 'fails'});
+        var data = new shortURL({
+            originalUrl: urlToShorten,
+            shorterUrl: 'Invalid url'
+        });
+        return res.json(data);
     };
-    
     
 });
 

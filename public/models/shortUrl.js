@@ -8,7 +8,7 @@ const Schema = mongoose.Schema;
 //Create Schema
 const urlSchema = new Schema({
     originalUrl: String,
-    shortUrl: String
+    shorterUrl: String
 }, {timestamps: true});
 
 //Define model class
