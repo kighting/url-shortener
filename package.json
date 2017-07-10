@@ -4,7 +4,7 @@
   "private": true,
   "engines": {
       "node": "5.6.0",
-      "npm": "3.6.0"
+      "npm": "5.0.3"
   },
   "main": "app.js",
   "scripts": {
