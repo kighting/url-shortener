@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 //There's no need to create a primary key, because mongoose does that for you
 
 //Create Schema
-const urlSchema = new Schema({
+const urlSchema = new mongoose.Schema({
     originalUrl: String,
     shorterUrl: String
 }, {timestamps: true});
@@ -18,5 +18,3 @@ const ModelClass = mongoose.model('shortUrl', urlSchema);
 
 //Allow us to access this in app.js
 module.exports = ModelClass;
-
-

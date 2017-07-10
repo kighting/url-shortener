@@ -24,7 +24,7 @@ app.use(express.static(__dirname + '/public'));
 app.get('/new/:urlToShorten(*)', function(req, res, next){
     var urlToShorten = req.params.urlToShorten;
     //console.log(urlToShorten);
-    
+
     //Regex for url to verify if the input is a link
     var regex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
     if(regex.test(urlToShorten)===true){
@@ -34,7 +34,7 @@ app.get('/new/:urlToShorten(*)', function(req, res, next){
             {
                 //The keys need to match the schema in shortUrl.js
                 originalUrl: urlToShorten,
-                shorterUrl: 'https://kt-url-shortener.herokuapp.com/' + short
+                shorterUrl: short
             }
         );
         //Save the document to the database
@@ -59,8 +59,8 @@ app.get('/:urlToForward', function(req, res, next){
     //findOne() is a build-in Mongoose function, which allows us to pass through the object and see if it exists in the database
     //Check if the shortened URL (urlToForward) match the value of any shorterUrl key in the database
     shortUrl.findOne({shorterUrl: urlToForward}, function(err, doc){
-        console.log(doc[originalUrl]);
         if(err){
+            console.log(doc);
             return res.send('Error reading database');
         }
         //Redirect it
@@ -71,7 +71,7 @@ app.get('/:urlToForward', function(req, res, next){
             //https://expressjs.com/en/4x/api.html#res.redirect
             res.redirect(301, link);
         } else {
-            res.redirect(301, 'http://' + link);   
+            res.redirect(301, 'http://' + link);
         }
     });
 });
