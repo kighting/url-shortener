@@ -17,9 +17,17 @@
             <section ng-controller='shortAppCtrl'>
                 <!--{{urlToShorten}}-->
                 <!--Create value through the input. No need to include this.-->
-                <input placeholder="Enter URL" ng-model="urlToShorten">
-                <div class="btn-primary"><a ng-href="/new/{{urlToShorten}}">Send</a></div>
+                <input id="urlInput" placeholder="Enter URL" ng-model="urlToShorten">
+                <div class="btn-primary"><a ng-href="/new/{{urlToShorten}}" id="btn-send">Send</a></div>
             </section>
         </div>
     </body>
+    <script>
+        document.getElementById("urlInput").addEventListener("keyup", function(event) {
+            event.preventDefault();
+            if (event.keyCode == 13) {
+                document.getElementById("btn-send").click();
+            }
+        });
+    </script>
 </html>

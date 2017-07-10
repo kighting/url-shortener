@@ -5,9 +5,15 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const shortURL = require('./public/models/shortUrl'); //The structure/template of the our URL document
 
 app.use(bodyParser.json());
 app.use(cors());
+
+//Connect to the database
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/shortUrls');
+//The collection is shortUrls because mongoDB pularize the name of the collection
+
 
 //Allows node to find static content
 app.use(express.static(__dirname + '/public'));
@@ -17,11 +23,18 @@ app.use(express.static(__dirname + '/public'));
 //If we call http://, the system will think that we'll go into a sub directory. (*) is saying that "accept 'all' as the string regardless how it's formatted"
 app.get('/new/:urlToShorten(*)', function(req, res, next){
     var urlToShorten = req.params.urlToShorten;
-//    console.log(urlToShorten);
-    return res.json({urlToshorten});
+    //console.log(urlToShorten);
+    
+    //Regex for url to verify if the input is a link
+    var regex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+    if(regex.test(urlToShorten)===true){
+        return res.json({urlToshorten});
+    } else {
+        return res.json({urlToshorten: 'fails'});
+    };
+    
+    
 });
-
-
 
 
 
