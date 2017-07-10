@@ -58,14 +58,14 @@ app.get('/:urlToForward', function(req, res, next){
     var urlToForward = req.params.urlToForward;
     //findOne() is a build-in Mongoose function, which allows us to pass through the object and see if it exists in the database
     //Check if the shortened URL (urlToForward) match the value of any shorterUrl key in the database
-    shortURL.findOne({shorterUrl: urlToForward}, function(err, data){
+    shortURL.findOne({'shorterUrl': urlToForward}, function(err, data){
         if(err){
             return res.send('Error reading database');
         } else {
             //Redirect it
             res.redirect(301, data.originalUrl);
 //            var re = new RegExp("^(http|https)://", "i"); //Check if the input URL has http:// or https://
-//            var strToCheck = data.orginialUrl;
+//            var strToCheck = data.originalUrl;
 //            if(re.test(strToCheck)){
 //                //https://expressjs.com/en/4x/api.html#res.redirect
 //                res.redirect(301, data.originalUrl);
@@ -80,5 +80,5 @@ app.get('/:urlToForward', function(req, res, next){
 //Listen to see if everything is working
 //process.env.PORT is the port for Heroku
 app.listen(process.env.PORT || 3000, function(){
-  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+  console.log("listening");
 });
