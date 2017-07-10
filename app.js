@@ -58,19 +58,20 @@ app.get('/:urlToForward', function(req, res, next){
     var urlToForward = req.params.urlToForward;
     //findOne() is a build-in Mongoose function, which allows us to pass through the object and see if it exists in the database
     //Check if the shortened URL (urlToForward) match the value of any shorterUrl key in the database
-    shortUrl.findOne({'shorterUrl': urlToForward}, function(err, data){
+    shortUrl.findOne({shorterUrl: urlToForward}, function(err, doc){
+        console.log(doc[originalUrl]);
         if(err){
             return res.send('Error reading database');
+        }
+        //Redirect it
+        var re = new RegExp("^(http|https)://", "i"); //Check if the input URL has http:// or https://
+        var link = doc.originalUrl;
+        var strToCheck = link;
+        if(re.test(strToCheck)){
+            //https://expressjs.com/en/4x/api.html#res.redirect
+            res.redirect(301, link);
         } else {
-            //Redirect it
-            var re = new RegExp("^(http|https)://", "i"); //Check if the input URL has http:// or https://
-            var strToCheck = data.originalUrl;
-            if(re.test(strToCheck)){
-                //https://expressjs.com/en/4x/api.html#res.redirect
-                res.redirect(301, data.originalUrl);
-            } else {
-                res.redirect(301, 'http://' + data.originalUrl);   
-            }
+            res.redirect(301, 'http://' + link);   
         }
     });
 });
