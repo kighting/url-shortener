@@ -34,7 +34,7 @@ app.get('/new/:urlToShorten(*)', function(req, res, next){
             {
                 //The keys need to match the schema in shortUrl.js
                 originalUrl: urlToShorten,
-                shorterUrl: 'http://kt-url-shortener.herokuapp.com/' + short
+                shorterUrl: 'https://kt-url-shortener.herokuapp.com/' + short
             }
         );
         //Save the document to the database
