@@ -63,14 +63,15 @@ app.get('/:urlToForward', function(req, res, next){
             return res.send('Error reading database');
         } else {
             //Redirect it
-            var re = new RegExp("^(http|https)://", "i"); //Check if the input URL has http:// or https://
-            var strToCheck = data.orginialUrl;
-            if(re.test(strToCheck)){
-                //https://expressjs.com/en/4x/api.html#res.redirect
-                res.redirect(301, data.originalUrl);
-            } else {
-                res.redirect(301, 'http://' + data.originalUrl);   
-            }
+            res.redirect(301, data.originalUrl);
+//            var re = new RegExp("^(http|https)://", "i"); //Check if the input URL has http:// or https://
+//            var strToCheck = data.orginialUrl;
+//            if(re.test(strToCheck)){
+//                //https://expressjs.com/en/4x/api.html#res.redirect
+//                res.redirect(301, data.originalUrl);
+//            } else {
+//                res.redirect(301, 'http://' + data.originalUrl);   
+//            }
         }
     });
 });
@@ -78,4 +79,6 @@ app.get('/:urlToForward', function(req, res, next){
 
 //Listen to see if everything is working
 //process.env.PORT is the port for Heroku
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3000, function(){
+  console.log("Express server listening on port %d in %s mode", this.address().port, app.settings.env);
+});
