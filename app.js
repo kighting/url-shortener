@@ -5,7 +5,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const shortURL = require('./public/models/shortUrl'); //The structure/template of the our URL document
+const shortUrl = require('./public/models/shortUrl'); //The structure/template of the our URL document
 
 app.use(bodyParser.json());
 app.use(cors());
@@ -30,7 +30,7 @@ app.get('/new/:urlToShorten(*)', function(req, res, next){
     if(regex.test(urlToShorten)===true){
         //Create a potential document
         var short = Math.floor(Math.random()*100000).toString();
-        var data = new shortURL(
+        var data = new shortUrl(
             {
                 //The keys need to match the schema in shortUrl.js
                 originalUrl: urlToShorten,
@@ -45,7 +45,7 @@ app.get('/new/:urlToShorten(*)', function(req, res, next){
         });
         return res.json(data);
     } else {
-        var data = new shortURL({
+        var data = new shortUrl({
             originalUrl: urlToShorten,
             shorterUrl: 'Invalid url'
         });
@@ -58,7 +58,7 @@ app.get('/:urlToForward', function(req, res, next){
     var urlToForward = req.params.urlToForward;
     //findOne() is a build-in Mongoose function, which allows us to pass through the object and see if it exists in the database
     //Check if the shortened URL (urlToForward) match the value of any shorterUrl key in the database
-    shortURL.findOne({'shorterUrl': urlToForward}, function(err, data){
+    shortUrl.findOne({'shorterUrl': urlToForward}, function(err, data){
         if(err){
             return res.send('Error reading database');
         } else {
