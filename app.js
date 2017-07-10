@@ -34,7 +34,7 @@ app.get('/new/:urlToShorten(*)', function(req, res, next){
             {
                 //The keys need to match the schema in shortUrl.js
                 originalUrl: urlToShorten,
-                shorterUrl: short
+                shorterUrl: 'https://kt-url-shortener.herokuapp.com/' + short
             }
         );
         //Save the document to the database
@@ -66,6 +66,7 @@ app.get('/:urlToForward', function(req, res, next){
             var re = new RegExp("^(http|https)://", "i"); //Check if the input URL has http:// or https://
             var strToCheck = data.orginialUrl;
             if(re.test(strToCheck)){
+                //https://expressjs.com/en/4x/api.html#res.redirect
                 res.redirect(301, data.originalUrl);
             } else {
                 res.redirect(301, 'http://' + data.originalUrl);   

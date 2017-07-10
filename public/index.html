@@ -13,13 +13,15 @@
             <h2>Author: <a href="https://github.com/kighting/">Kaiting Huang</a></h2>
             <div class="divider"></div>
             <p class="title">Example usage</p>
-            <p>Input URL that you want to shorten after the original URL:</p>
+            <p>Input URL that you want to shorten:</p>
             <section ng-controller='shortAppCtrl'>
                 <!--{{urlToShorten}}-->
                 <!--Create value through the input. No need to include this.-->
-                <input id="urlInput" placeholder="Enter URL" ng-model="urlToShorten">
+                <input id="urlInput" placeholder="http://" ng-model="urlToShorten">
                 <div class="btn-primary"><a ng-href="/new/{{urlToShorten}}" id="btn-send">Send</a></div>
             </section>
+            <p class="title">Expected output is JSON</p>
+            <code>{"originalUrl": http://www.the-URL-you-input.com/, "shorterUrl": http://the-shorten-URL/, "_id": 5962e18fccb71c669example}</code>
         </div>
     </body>
     <script>
