@@ -78,6 +78,8 @@ app.get('/:urlToForward', function(req, res, next){
 
 //Listen to see if everything is working
 //process.env.PORT is the port for Heroku
-app.listen(process.env.PORT || 3000, function(){
-  console.log("listening");
+var port = process.env.PORT || 3000;
+
+app.listen(port, function() {
+    console.log("App is running on port " + port);
 });
