@@ -14,6 +14,9 @@ app.use(cors());
 //mongoose.connect('mongodb://kt-url-shortener:kt-url-shortener@ds153752.mlab.com:53752/kt-url-shortener');
 mongoose.connect('mongodb://kt-url-shortener:kt-url-shortener@ds153752.mlab.com:53752/kt-url-shortener');
 // mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/shortUrls');
+mongoose.connection.once('connected', () => {
+    mongoose.connection.db.dropDatabase();
+});
 //The collection is shortUrls because mongoDB pularize the name of the collection
 
 
