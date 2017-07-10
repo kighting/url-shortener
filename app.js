@@ -60,7 +60,6 @@ app.get('/:urlToForward', function(req, res, next){
     //Check if the shortened URL (urlToForward) match the value of any shorterUrl key in the database
     shortUrl.findOne({shorterUrl: urlToForward}, function(err, doc){
         if(err){
-            console.log(doc);
             return res.send('Error reading database');
         }
         //Redirect it
