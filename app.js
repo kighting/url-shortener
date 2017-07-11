@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 //Connect to the database
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/shortUrls');
 //The collection is shortUrls because mongoDB pularize the name of the collection
 
 
